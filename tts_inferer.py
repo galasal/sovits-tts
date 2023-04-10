@@ -1,30 +1,17 @@
-from vits import utils
-from vits.text.symbols import symbols
-from vits.models import SynthesizerTrn
-from vits.text import text_to_sequence
-import vits.commons as commons
 import torch
 from pathlib import Path
 from so_vits_svc_fork.inference.infer_tool import Svc
 import numpy as np
 import librosa
-import soundfile
 import gradio as gr
 import webbrowser
+import azure.cognitiveservices.speech as speechsdk
+import os
+from emotion_classifier import emotion_classifier
+from lxml import etree
 
 class tts_inferer:
-    def __init__(self, vits_config_path, vits_model_path, svc_config_path, svc_model_path):
-        #initialise vits model
-        self.vits_hps = utils.get_hparams_from_file(vits_config_path)
-        self.vits_net_g = SynthesizerTrn(
-            len(symbols),
-            self.vits_hps.data.filter_length // 2 + 1,
-            self.vits_hps.train.segment_size // self.vits_hps.data.hop_length,
-            n_speakers=self.vits_hps.data.n_speakers,
-            **self.vits_hps.model).cuda()
-        _ = self.vits_net_g.eval()
-        _ = utils.load_checkpoint(vits_model_path, self.vits_net_g, None)
-
+    def __init__(self, svc_config_path, svc_model_path):
         #initialise sovits model
         device = "cuda" if torch.cuda.is_available() else "cpu"
         svc_config_path = Path(svc_config_path)
@@ -36,27 +23,35 @@ class tts_inferer:
             device=device,
         )
 
-    def __get_text(self, text):
-        text_norm = text_to_sequence(text, self.vits_hps.data.text_cleaners)
-        if self.vits_hps.data.add_blank:
-            text_norm = commons.intersperse(text_norm, 0)
-        text_norm = torch.LongTensor(text_norm)
-        return text_norm
+        #initialise azure model
+        self.azure_temp_file = "tmp/tmp.wav"
+        self.tree = etree.parse("azure.xml")
+        speech_key = os.environ.get('SPEECH_KEY')
+        service_region = os.environ.get('SPEECH_REGION')
+        speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
+        speech_config.set_speech_synthesis_output_format(speechsdk.SpeechSynthesisOutputFormat.Riff24Khz16BitMonoPcm)  
+        self.azureSynthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=None)
 
-    #turn text into speech using vits
-    def __vits_infer(self, text, speaker, speed):
-        stn_tst = self.__get_text(text)
-        length_scale = 1 / speed
-        with torch.no_grad():
-            x_tst = stn_tst.cuda().unsqueeze(0)
-            x_tst_lengths = torch.LongTensor([stn_tst.size(0)]).cuda()
-            sid = torch.LongTensor([speaker]).cuda()
-            audio = self.vits_net_g.infer(x_tst, x_tst_lengths, sid=sid, noise_scale=.667, noise_scale_w=0.8, length_scale=length_scale)[0][0,0].data.cpu().float().numpy()
-        return audio
-    
+        #initialise emotion classification
+        self.classifier = emotion_classifier()
+
+    def __azure_infer(self, text, speaker, speed):
+        emotion = self.classifier.map_to_azure_emotion(text)
+        self.tree.find(".//{*}express-as").set("style", f"{emotion}")
+        self.tree.find(".//{*}prosody").text = text
+        self.tree.find(".//{*}prosody").set("rate", f"{speed}")
+        if speaker is not None:
+            self.tree.find(".//{*}voice").set("name", speaker)
+        ssml_string = etree.tostring(self.tree).decode('utf-8')
+        result = self.azureSynthesizer.speak_ssml_async(ssml_string).get()
+        stream = speechsdk.AudioDataStream(result)
+        stream.save_to_wav_file(self.azure_temp_file)
+        audio, sr = librosa.load(self.azure_temp_file, sr=self.svc.target_sample)  
+        return audio 
+
     #convert audio using so-vits-svc
+    #audio should already be at correct sample rate
     def __svc_infer(self, audio):
-        audio = librosa.resample(audio, orig_sr=self.vits_hps.data.sampling_rate, target_sr=self.svc.target_sample)
         audio = self.svc.infer_silence(
             audio.astype(np.float32),
             speaker=0,
@@ -74,25 +69,17 @@ class tts_inferer:
         return audio
 
     def infer(self, text, speaker, speed):
-        audio = self.__vits_infer(text, speaker, speed)
-        soundfile.write("tts.wav", audio, self.vits_hps.data.sampling_rate)
-        audio = self.__svc_infer(audio)
-        return audio
+        raw_audio = self.__azure_infer(text, speaker, speed)
+        audio = self.__svc_infer(raw_audio)
+        return audio, raw_audio
 
+def gui_inference(text, speaker, speed):
+    audio, raw_audio = inferer.infer(text, speaker, speed)
+    return (inferer.svc.target_sample, audio), (inferer.svc.target_sample, raw_audio)
 
 inferer = tts_inferer(
-    vits_config_path="F:/AIVoice/data/models/vits_original/vctk_base.json", 
-    vits_model_path="F:/AIVoice/data/models/vits_original/pretrained_vctk.pth", 
     svc_config_path="F:/AIVoice/data/sovits models/purin/config.json", 
     svc_model_path="F:/AIVoice/data/sovits models/purin/G_8000.pth")
-
-#audio = inferer.infer("hello, how are you. I think this sounds a little strage, don't you? Let's make it talk for even longer.", 1000, 1)
-#soundfile.write("output.wav", audio, inferer.svc.target_sample)
-
-def gui_infer(text, speed):
-    audio = inferer.infer(text, 0, speed)
-    return (inferer.svc.target_sample, audio)
-
 
 app = gr.Blocks()
 with app:
@@ -102,14 +89,18 @@ with app:
                 textbox = gr.TextArea(label="Text",
                                         placeholder="Type your sentence here",
                                         value="Hello", elem_id=f"tts-input")
+                speakerbox = gr.Textbox(label="Text",
+                                        placeholder="Speaker name here",
+                                        value="en-US-JennyNeural", elem_id=f"speaker-input")
                 # select character
                 duration_slider = gr.Slider(minimum=0.1, maximum=5, value=1, step=0.1,
                                             label='Speed')
             with gr.Column():
+                raw_output = gr.Audio(label="Raw Audio", elem_id="tts-audio")
                 audio_output = gr.Audio(label="Output Audio", elem_id="tts-audio")
                 btn = gr.Button("Generate!")
-                btn.click(gui_infer,
-                            inputs=[textbox, duration_slider,],
-                            outputs=[audio_output])
+                btn.click(gui_inference,
+                            inputs=[textbox, speakerbox, duration_slider,],
+                            outputs=[audio_output, raw_output])
 webbrowser.open("http://127.0.0.1:7860")
 app.launch(share=False)

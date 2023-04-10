@@ -1,0 +1,364 @@
+[14:51:30] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[14:51:31] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[14:51:31] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[14:51:46] current directory is F:\AIVoice\sovits-tts
+[14:51:46] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[14:51:47] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[14:51:57] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[14:53:03] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[14:53:03] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[14:53:03] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[14:53:05] current directory is F:\AIVoice\sovits-tts
+[14:53:05] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[14:53:05] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[14:53:08] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[14:54:49] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[14:54:49] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[14:54:49] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[14:54:51] current directory is F:\AIVoice\sovits-tts
+[14:54:51] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[14:54:51] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[14:54:54] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:02:15] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[15:02:15] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[15:02:16] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[15:02:17] current directory is F:\AIVoice\sovits-tts
+[15:02:17] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[15:02:17] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[15:02:21] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:04:46] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[15:04:46] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[15:04:46] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[15:04:47] current directory is F:\AIVoice\sovits-tts
+[15:04:47] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[15:04:47] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[15:04:51] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:05:31] Chunk: Chunk(Speech: True, 35280.0)
+[15:05:31] F0 inference time:       0.108s, RTF: 0.060
+[15:05:38] HuBERT inference time  : 7.275s, RTF: 4.042
+[15:05:40] Inferece time: 1.13s, RTF: 0.63
+[15:05:40] Chunk: Chunk(Speech: False, 28673.0)
+[15:05:40] C:\Users\S_amb\AppData\Local\Programs\Python\Python310\lib\site-packages\gradio\processing_utils.py:236: UserWarning: Trying to convert audio automatically from float32 to 16-bit int format.
+  warnings.warn(warning.format(data.dtype))
+
+[15:06:02] Chunk: Chunk(Speech: True, 88200.0)
+[15:06:02] F0 inference time:       0.167s, RTF: 0.056
+[15:06:02] HuBERT inference time  : 0.030s, RTF: 0.010
+[15:06:02] Inferece time: 0.11s, RTF: 0.04
+[15:06:02] Chunk: Chunk(Speech: False, 25920.0)
+[15:06:25] Chunk: Chunk(Speech: True, 88200.0)
+[15:06:25] F0 inference time:       0.153s, RTF: 0.051
+[15:06:25] HuBERT inference time  : 0.016s, RTF: 0.005
+[15:06:25] Inferece time: 0.05s, RTF: 0.02
+[15:06:25] Chunk: Chunk(Speech: False, 22153.0)
+[15:06:56] Chunk: Chunk(Speech: True, 273420.0)
+[15:06:56] F0 inference time:       0.297s, RTF: 0.041
+[15:06:57] HuBERT inference time  : 0.023s, RTF: 0.003
+[15:06:57] Inferece time: 0.10s, RTF: 0.01
+[15:06:57] Chunk: Chunk(Speech: False, 25939.0)
+[15:07:42] Chunk: Chunk(Speech: True, 105840.0)
+[15:07:42] F0 inference time:       0.161s, RTF: 0.047
+[15:07:43] HuBERT inference time  : 0.030s, RTF: 0.009
+[15:07:43] Inferece time: 0.12s, RTF: 0.03
+[15:07:43] Chunk: Chunk(Speech: False, 20959.0)
+[15:18:22] Chunk: Chunk(Speech: True, 158760.0)
+[15:18:22] F0 inference time:       0.161s, RTF: 0.035
+[15:18:22] HuBERT inference time  : 0.034s, RTF: 0.007
+[15:18:23] Inferece time: 0.13s, RTF: 0.03
+[15:18:23] Chunk: Chunk(Speech: False, 25926.0)
+[15:18:55] Chunk: Chunk(Speech: True, 158760.0)
+[15:18:55] F0 inference time:       0.176s, RTF: 0.038
+[15:18:55] HuBERT inference time  : 0.016s, RTF: 0.004
+[15:18:55] Inferece time: 0.05s, RTF: 0.01
+[15:18:56] Chunk: Chunk(Speech: False, 25926.0)
+[15:20:10] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[15:20:10] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[15:20:10] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[15:20:11] current directory is F:\AIVoice\sovits-tts
+[15:20:11] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[15:20:11] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[15:20:14] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:20:40] Chunk: Chunk(Speech: True, 132300.0)
+[15:20:41] F0 inference time:       0.205s, RTF: 0.051
+[15:20:45] HuBERT inference time  : 4.004s, RTF: 1.001
+[15:20:46] Inferece time: 0.72s, RTF: 0.18
+[15:20:46] Chunk: Chunk(Speech: False, 27574.0)
+[15:20:46] C:\Users\S_amb\AppData\Local\Programs\Python\Python310\lib\site-packages\gradio\processing_utils.py:236: UserWarning: Trying to convert audio automatically from float32 to 16-bit int format.
+  warnings.warn(warning.format(data.dtype))
+
+[15:21:34] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[15:21:34] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[15:21:34] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[15:21:36] current directory is F:\AIVoice\sovits-tts
+[15:21:36] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[15:21:36] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[15:21:39] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:22:08] Chunk: Chunk(Speech: True, 141120.0)
+[15:22:08] F0 inference time:       0.146s, RTF: 0.035
+[15:22:12] HuBERT inference time  : 3.580s, RTF: 0.852
+[15:22:12] Inferece time: 0.71s, RTF: 0.17
+[15:22:13] Chunk: Chunk(Speech: False, 22616.0)
+[15:22:13] C:\Users\S_amb\AppData\Local\Programs\Python\Python310\lib\site-packages\gradio\processing_utils.py:236: UserWarning: Trying to convert audio automatically from float32 to 16-bit int format.
+  warnings.warn(warning.format(data.dtype))
+
+[15:22:48] Chunk: Chunk(Speech: True, 88200.0)
+[15:22:48] F0 inference time:       0.153s, RTF: 0.051
+[15:22:49] HuBERT inference time  : 0.028s, RTF: 0.009
+[15:22:49] Inferece time: 0.12s, RTF: 0.04
+[15:22:49] Chunk: Chunk(Speech: False, 22613.0)
+[15:23:17] Chunk: Chunk(Speech: True, 158760.0)
+[15:23:18] F0 inference time:       0.149s, RTF: 0.032
+[15:23:18] HuBERT inference time  : 0.029s, RTF: 0.006
+[15:23:18] Inferece time: 0.11s, RTF: 0.02
+[15:23:18] Chunk: Chunk(Speech: False, 25376.0)
+[15:24:07] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[15:24:08] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[15:24:08] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[15:24:09] current directory is F:\AIVoice\sovits-tts
+[15:24:09] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[15:24:09] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[15:24:12] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:24:45] Chunk: Chunk(Speech: True, 476280.0)
+[15:24:45] F0 inference time:       0.379s, RTF: 0.032
+[15:24:50] HuBERT inference time  : 3.795s, RTF: 0.322
+[15:24:50] Inferece time: 0.75s, RTF: 0.06
+[15:24:51] Chunk: Chunk(Speech: False, 8820.0)
+[15:24:51] Chunk: Chunk(Speech: True, 1084860.0)
+[15:24:53] F0 inference time:       1.721s, RTF: 0.067
+[15:24:54] HuBERT inference time  : 0.028s, RTF: 0.001
+[15:24:55] Inferece time: 0.12s, RTF: 0.00
+[15:24:56] Chunk: Chunk(Speech: False, 23045.0)
+[15:24:56] C:\Users\S_amb\AppData\Local\Programs\Python\Python310\lib\site-packages\gradio\processing_utils.py:236: UserWarning: Trying to convert audio automatically from float32 to 16-bit int format.
+  warnings.warn(warning.format(data.dtype))
+
+[15:28:21] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[15:28:21] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[15:28:21] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[15:28:23] current directory is F:\AIVoice\sovits-tts
+[15:28:23] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[15:28:23] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[15:28:26] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:34:55] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[15:34:55] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[15:34:56] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[15:34:57] current directory is F:\AIVoice\sovits-tts
+[15:34:57] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[15:34:57] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[15:35:00] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:35:44] Chunk: Chunk(Speech: True, 1640520.0)
+[15:35:46] F0 inference time:       1.613s, RTF: 0.042
+[15:35:51] HuBERT inference time  : 3.571s, RTF: 0.093
+[15:35:52] Inferece time: 0.67s, RTF: 0.02
+[15:35:54] Chunk: Chunk(Speech: False, 27251.0)
+[15:35:54] C:\Users\S_amb\AppData\Local\Programs\Python\Python310\lib\site-packages\gradio\processing_utils.py:236: UserWarning: Trying to convert audio automatically from float32 to 16-bit int format.
+  warnings.warn(warning.format(data.dtype))
+
+[15:37:44] Chunk: Chunk(Speech: True, 185220.0)
+[15:37:44] F0 inference time:       0.167s, RTF: 0.032
+[15:37:45] HuBERT inference time  : 0.033s, RTF: 0.006
+[15:37:45] Inferece time: 0.11s, RTF: 0.02
+[15:37:45] Chunk: Chunk(Speech: False, 20963.0)
+[15:39:38] Chunk: Chunk(Speech: True, 273420.0)
+[15:39:38] F0 inference time:       0.378s, RTF: 0.053
+[15:39:38] HuBERT inference time  : 0.032s, RTF: 0.004
+[15:39:39] Inferece time: 0.12s, RTF: 0.02
+[15:39:39] Chunk: Chunk(Speech: False, 22385.0)
+[15:39:39] C:\Users\S_amb\AppData\Local\Programs\Python\Python310\lib\site-packages\gradio\processing_utils.py:236: UserWarning: Trying to convert audio automatically from float32 to 16-bit int format.
+  warnings.warn(warning.format(data.dtype))
+
+[15:40:22] Chunk: Chunk(Speech: True, 335160.0)
+[15:40:22] F0 inference time:       0.341s, RTF: 0.040
+[15:40:23] HuBERT inference time  : 0.029s, RTF: 0.003
+[15:40:23] Inferece time: 0.11s, RTF: 0.01
+[15:40:23] Chunk: Chunk(Speech: False, 24369.0)
+[15:40:23] C:\Users\S_amb\AppData\Local\Programs\Python\Python310\lib\site-packages\gradio\processing_utils.py:236: UserWarning: Trying to convert audio automatically from float32 to 16-bit int format.
+  warnings.warn(warning.format(data.dtype))
+
+[15:45:05] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[15:45:05] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[15:45:05] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[15:45:07] current directory is F:\AIVoice\sovits-tts
+[15:45:07] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[15:45:07] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[15:45:10] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:45:44] Chunk: Chunk(Speech: True, 79380.0)
+[15:45:44] F0 inference time:       0.074s, RTF: 0.026
+[15:45:48] HuBERT inference time  : 3.426s, RTF: 1.224
+[15:45:48] Inferece time: 0.69s, RTF: 0.25
+[15:45:48] Chunk: Chunk(Speech: False, 27563.0)
+[15:45:48] C:\Users\S_amb\AppData\Local\Programs\Python\Python310\lib\site-packages\gradio\processing_utils.py:236: UserWarning: Trying to convert audio automatically from float32 to 16-bit int format.
+  warnings.warn(warning.format(data.dtype))
+
+[15:46:19] Chunk: Chunk(Speech: True, 890820.0)
+[15:46:20] F0 inference time:       0.745s, RTF: 0.035
+[15:46:21] HuBERT inference time  : 0.029s, RTF: 0.001
+[15:46:21] Inferece time: 0.10s, RTF: 0.00
+[15:46:22] Chunk: Chunk(Speech: False, 22050.0)
+[15:47:03] Chunk: Chunk(Speech: True, 908460.0)
+[15:47:04] F0 inference time:       0.712s, RTF: 0.033
+[15:47:05] HuBERT inference time  : 0.029s, RTF: 0.001
+[15:47:05] Inferece time: 0.10s, RTF: 0.00
+[15:47:06] Chunk: Chunk(Speech: False, 20948.0)
+[15:47:51] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[15:47:51] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[15:47:51] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[15:47:52] current directory is F:\AIVoice\sovits-tts
+[15:47:52] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[15:47:53] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[15:47:56] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:48:23] Chunk: Chunk(Speech: True, 908460.0)
+[15:48:24] F0 inference time:       0.997s, RTF: 0.046
+[15:48:30] HuBERT inference time  : 3.528s, RTF: 0.163
+[15:48:31] Inferece time: 0.70s, RTF: 0.03
+[15:48:32] Chunk: Chunk(Speech: False, 20948.0)
+[15:48:32] C:\Users\S_amb\AppData\Local\Programs\Python\Python310\lib\site-packages\gradio\processing_utils.py:236: UserWarning: Trying to convert audio automatically from float32 to 16-bit int format.
+  warnings.warn(warning.format(data.dtype))
+
+[15:49:22] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[15:49:22] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[15:49:22] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[15:49:23] current directory is F:\AIVoice\sovits-tts
+[15:49:23] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[15:49:24] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[15:49:27] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:49:57] Chunk: Chunk(Speech: True, 908460.0)
+[15:49:58] F0 inference time:       0.895s, RTF: 0.041
+[15:50:03] HuBERT inference time  : 3.790s, RTF: 0.175
+[15:50:04] Inferece time: 0.68s, RTF: 0.03
+[15:50:05] Chunk: Chunk(Speech: False, 20948.0)
+[15:50:05] C:\Users\S_amb\AppData\Local\Programs\Python\Python310\lib\site-packages\gradio\processing_utils.py:236: UserWarning: Trying to convert audio automatically from float32 to 16-bit int format.
+  warnings.warn(warning.format(data.dtype))
+
+[15:52:18] WARNING[XFORMERS]: xFormers can't load C++/CUDA extensions. xFormers was built for:
+    PyTorch 1.13.1+cu117 with CUDA 1107 (you have 2.0.0+cu117)
+    Python  3.10.9 (you have 3.10.8)
+  Please reinstall xformers (see https://github.com/facebookresearch/xformers#installing-xformers)
+  Memory-efficient attention, SwiGLU, sparse and more won't be available.
+  Set XFORMERS_MORE_DETAILS=1 for more details
+[15:52:18] A matching Triton is not available, some optimizations will not be enabled.
+Error caught was: No module named 'triton'
+[15:52:18] Triton is not available, some optimizations will not be enabled.
+This is just a warning: No module named 'triton'
+[15:52:20] current directory is F:\AIVoice\sovits-tts
+[15:52:20] HubertPretrainingTask Config {'_name': 'hubert_pretraining', 'data': 'metadata', 'fine_tuning': False, 'labels': ['km'], 'label_dir': 'label', 'label_rate': 50.0, 'sample_rate': 16000, 'normalize': False, 'enable_padding': False, 'max_keep_size': None, 'max_sample_size': 250000, 'min_sample_size': 32000, 'single_target': False, 'random_crop': True, 'pad_audio': False}
+[15:52:20] HubertModel Config: {'_name': 'hubert', 'label_rate': 50.0, 'extractor_mode': default, 'encoder_layers': 12, 'encoder_embed_dim': 768, 'encoder_ffn_embed_dim': 3072, 'encoder_attention_heads': 12, 'activation_fn': gelu, 'layer_type': transformer, 'dropout': 0.1, 'attention_dropout': 0.1, 'activation_dropout': 0.0, 'encoder_layerdrop': 0.05, 'dropout_input': 0.1, 'dropout_features': 0.1, 'final_dim': 256, 'untie_final_proj': True, 'layer_norm_first': False, 'conv_feature_layers': '[(512,10,5)] + [(512,3,2)] * 4 + [(512,2,2)] * 2', 'conv_bias': False, 'logit_temp': 0.1, 'target_glu': False, 'feature_grad_mult': 0.1, 'mask_length': 10, 'mask_prob': 0.8, 'mask_selection': static, 'mask_other': 0.0, 'no_mask_overlap': False, 'mask_min_space': 1, 'mask_channel_length': 10, 'mask_channel_prob': 0.0, 'mask_channel_selection': static, 'mask_channel_other': 0.0, 'no_mask_channel_overlap': False, 'mask_channel_min_space': 1, 'conv_pos': 128, 'conv_pos_groups': 16, 'latent_temp': [2.0, 0.5, 0.999995], 'skip_masked': False, 'skip_nomask': False, 'checkpoint_activations': False, 'required_seq_len_multiple': 2, 'depthwise_conv_kernel_size': 31, 'attn_type': '', 'pos_enc_type': 'abs', 'fp16': False}
+[15:52:23] Loaded checkpoint 'F:/AIVoice/data/sovits models/purin/G_8000.pth' (iteration 75)
+[15:52:49] Chunk: Chunk(Speech: True, 908460.0)
+[15:52:50] F0 inference time:       0.876s, RTF: 0.041
+[15:52:55] HuBERT inference time  : 3.522s, RTF: 0.163
+[15:52:56] Inferece time: 0.62s, RTF: 0.03
+[15:52:57] Chunk: Chunk(Speech: False, 21389.0)
+[15:52:57] C:\Users\S_amb\AppData\Local\Programs\Python\Python310\lib\site-packages\gradio\processing_utils.py:236: UserWarning: Trying to convert audio automatically from float32 to 16-bit int format.
+  warnings.warn(warning.format(data.dtype))
+
+[15:53:30] Chunk: Chunk(Speech: True, 97020.0)
+[15:53:30] F0 inference time:       0.156s, RTF: 0.049
+[15:53:30] HuBERT inference time  : 0.032s, RTF: 0.010
+[15:53:31] Inferece time: 0.11s, RTF: 0.03
+[15:53:31] Chunk: Chunk(Speech: False, 23739.0)
+[15:55:15] Chunk: Chunk(Speech: True, 255780.0)
+[15:55:15] F0 inference time:       0.327s, RTF: 0.048
+[15:55:16] HuBERT inference time  : 0.034s, RTF: 0.005
+[15:55:16] Inferece time: 0.11s, RTF: 0.02
+[15:55:16] Chunk: Chunk(Speech: False, 28739.0)
+[15:55:53] Chunk: Chunk(Speech: True, 388080.0)
+[15:55:54] F0 inference time:       0.380s, RTF: 0.039
+[15:55:54] HuBERT inference time  : 0.027s, RTF: 0.003
+[15:55:54] Inferece time: 0.10s, RTF: 0.01
+[15:55:55] Chunk: Chunk(Speech: False, 22150.0)
+[16:00:01] Chunk: Chunk(Speech: True, 149940.0)
+[16:00:02] F0 inference time:       0.205s, RTF: 0.047
+[16:00:02] HuBERT inference time  : 0.029s, RTF: 0.007
+[16:00:02] Inferece time: 0.12s, RTF: 0.03
+[16:00:02] Chunk: Chunk(Speech: False, 28169.0)
