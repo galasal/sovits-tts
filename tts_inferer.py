@@ -25,7 +25,6 @@ class tts_inferer:
 
         #initialise azure model
         self.azure_temp_file = "tmp/tmp.wav"
-        self.tree = etree.parse("azure.xml")
         speech_key = os.environ.get('SPEECH_KEY')
         service_region = os.environ.get('SPEECH_REGION')
         speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
@@ -35,11 +34,14 @@ class tts_inferer:
         #initialise emotion classification
         self.classifier = emotion_classifier()
 
-    def __azure_infer(self, text, speaker, speed):
-        emotion = self.classifier.map_to_azure_emotion(text)
-        self.tree.find(".//{*}express-as").set("style", f"{emotion}")
+    #does azure tts. Saves result to temp file and also returns it
+    def azure_infer(self, text, speaker=None, emotion=None, speed=None):
+        self.tree = etree.parse("azure.xml")
         self.tree.find(".//{*}prosody").text = text
-        self.tree.find(".//{*}prosody").set("rate", f"{speed}")
+        if emotion is not None:
+            self.tree.find(".//{*}express-as").set("style", f"{emotion}")
+        if speed is not None:
+            self.tree.find(".//{*}prosody").set("rate", f"{speed}")
         if speaker is not None:
             self.tree.find(".//{*}voice").set("name", speaker)
         ssml_string = etree.tostring(self.tree).decode('utf-8')
@@ -51,7 +53,7 @@ class tts_inferer:
 
     #convert audio using so-vits-svc
     #audio should already be at correct sample rate
-    def __svc_infer(self, audio):
+    def svc_infer(self, audio):
         audio = self.svc.infer_silence(
             audio.astype(np.float32),
             speaker=0,
@@ -68,39 +70,9 @@ class tts_inferer:
 
         return audio
 
-    def infer(self, text, speaker, speed):
-        raw_audio = self.__azure_infer(text, speaker, speed)
-        audio = self.__svc_infer(raw_audio)
+    def infer(self, text, speaker=None, speed=None):
+        emotion = self.classifier.map_to_azure_emotion(text)
+        raw_audio = self.azure_infer(text=text, speaker=speaker, speed=speed, emotion=emotion)
+        audio = self.svc_infer(raw_audio)
         return audio, raw_audio
 
-def gui_inference(text, speaker, speed):
-    audio, raw_audio = inferer.infer(text, speaker, speed)
-    return (inferer.svc.target_sample, audio), (inferer.svc.target_sample, raw_audio)
-
-inferer = tts_inferer(
-    svc_config_path="F:/AIVoice/data/sovits models/purin/config.json", 
-    svc_model_path="F:/AIVoice/data/sovits models/purin/G_8000.pth")
-
-app = gr.Blocks()
-with app:
-    with gr.Tab("Text-to-Speech"):
-        with gr.Row():
-            with gr.Column():
-                textbox = gr.TextArea(label="Text",
-                                        placeholder="Type your sentence here",
-                                        value="Hello", elem_id=f"tts-input")
-                speakerbox = gr.Textbox(label="Text",
-                                        placeholder="Speaker name here",
-                                        value="en-US-JennyNeural", elem_id=f"speaker-input")
-                # select character
-                duration_slider = gr.Slider(minimum=0.1, maximum=5, value=1, step=0.1,
-                                            label='Speed')
-            with gr.Column():
-                raw_output = gr.Audio(label="Raw Audio", elem_id="tts-audio")
-                audio_output = gr.Audio(label="Output Audio", elem_id="tts-audio")
-                btn = gr.Button("Generate!")
-                btn.click(gui_inference,
-                            inputs=[textbox, speakerbox, duration_slider,],
-                            outputs=[audio_output, raw_output])
-webbrowser.open("http://127.0.0.1:7860")
-app.launch(share=False)
