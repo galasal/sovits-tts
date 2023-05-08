@@ -24,9 +24,7 @@ def sovits_infer(file_path):
     audio = inferer.svc_infer(audio)
     return (inferer.svc.target_sample, audio)
 
-inferer = tts_inferer(
-    svc_config_path="F:/AIVoice/data/sovits models/eri/config.json", 
-    svc_model_path="F:/AIVoice/data/sovits models/eri/G_7200.pth")
+inferer = tts_inferer("purin")
 
 app = gr.Blocks()
 with app:

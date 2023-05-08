@@ -3,19 +3,19 @@ from pathlib import Path
 from so_vits_svc_fork.inference.infer_tool import Svc
 import numpy as np
 import librosa
-import gradio as gr
-import webbrowser
 import azure.cognitiveservices.speech as speechsdk
 import os
 from emotion_classifier import emotion_classifier
 from lxml import etree
+import audio_processor
 
 class tts_inferer:
-    def __init__(self, svc_config_path, svc_model_path):
+    def __init__(self, model_folder_name):
         #initialise sovits model
         device = "cuda" if torch.cuda.is_available() else "cpu"
-        svc_config_path = Path(svc_config_path)
-        svc_model_path = Path(svc_model_path)
+        model_folder = Path("models/" + model_folder_name)
+        svc_config_path = model_folder / "config.json"
+        svc_model_path = next(iter(model_folder.glob("G_*.pth")), None)
         self.svc = Svc(
             net_g_path=svc_model_path.as_posix(),
             config_path=svc_config_path.as_posix(),
@@ -73,6 +73,9 @@ class tts_inferer:
     def infer(self, text, speaker=None, speed=None):
         emotion = self.classifier.map_to_azure_emotion(text)
         raw_audio = self.azure_infer(text=text, speaker=speaker, speed=speed, emotion=emotion)
+        #NOTE::hard coding filter type for now
+        raw_audio = audio_processor.filter_audio(audio=raw_audio, sr=self.svc.target_sample, filter_type="highpass")
+        raw_audio = audio_processor.shift_frequency(raw_audio, self.svc.target_sample, 5)
         audio = self.svc_infer(raw_audio)
         return audio, raw_audio
 
