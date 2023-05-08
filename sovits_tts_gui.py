@@ -11,8 +11,8 @@ from emotion_classifier import emotion_classifier
 from lxml import etree
 from tts_inferer import tts_inferer
 
-def sovits_tts_infer(text, speaker, speed):
-    audio, raw_audio = inferer.infer(text, speaker, speed)
+def sovits_tts_infer(text):
+    audio, raw_audio = inferer.infer(text)
     return (inferer.svc.target_sample, audio), (inferer.svc.target_sample, raw_audio)
 
 def tts_infer(text):
@@ -34,18 +34,12 @@ with app:
                 textbox = gr.TextArea(label="Text",
                                         placeholder="Type your sentence here",
                                         value="Hello", elem_id=f"tts-input")
-                speakerbox = gr.Textbox(label="Text",
-                                        placeholder="Speaker name here",
-                                        value="en-US-JennyNeural", elem_id=f"speaker-input")
-                # select character
-                duration_slider = gr.Slider(minimum=0.1, maximum=5, value=1, step=0.1,
-                                            label='Speed')
             with gr.Column():
                 raw_output = gr.Audio(label="Raw Audio", elem_id="tts-audio")
                 audio_output = gr.Audio(label="Output Audio", elem_id="tts-audio")
                 btn = gr.Button("Generate!")
                 btn.click(sovits_tts_infer,
-                            inputs=[textbox, speakerbox, duration_slider,],
+                            inputs=[textbox],
                             outputs=[audio_output, raw_output])
     with gr.Tab("azure only"):
         with gr.Row():

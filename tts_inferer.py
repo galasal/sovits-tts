@@ -8,12 +8,18 @@ import os
 from emotion_classifier import emotion_classifier
 from lxml import etree
 import audio_processor
+import json
 
 class tts_inferer:
     def __init__(self, model_folder_name):
-        #initialise sovits model
-        device = "cuda" if torch.cuda.is_available() else "cpu"
         model_folder = Path("models/" + model_folder_name)
+        self.__initialise_tts_config(model_folder)
+        self.__initialise_sovits(model_folder)
+        self.__initialise_azure()
+        self.classifier = emotion_classifier()
+
+    def __initialise_sovits(self, model_folder):
+        device = "cuda" if torch.cuda.is_available() else "cpu"
         svc_config_path = model_folder / "config.json"
         svc_model_path = next(iter(model_folder.glob("G_*.pth")), None)
         self.svc = Svc(
@@ -23,7 +29,7 @@ class tts_inferer:
             device=device,
         )
 
-        #initialise azure model
+    def __initialise_azure(self):
         self.azure_temp_file = "tmp/tmp.wav"
         speech_key = os.environ.get('SPEECH_KEY')
         service_region = os.environ.get('SPEECH_REGION')
@@ -31,11 +37,19 @@ class tts_inferer:
         speech_config.set_speech_synthesis_output_format(speechsdk.SpeechSynthesisOutputFormat.Riff24Khz16BitMonoPcm)  
         self.azureSynthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=None)
 
-        #initialise emotion classification
-        self.classifier = emotion_classifier()
+    def __initialise_tts_config(self, model_folder):
+        tts_config_path = model_folder / "tts-config.json"
+        with open(tts_config_path) as f:
+            tts_config = json.load(f)
+        self.base_voice = tts_config.get("baseVoice")
+        self.high_pass_cutoff_freq = tts_config.get("highPassCutoffFreq")
+        self.low_pass_cutoff_freq = tts_config.get("lowPassCutoffFreq")
+        self.azure_pitch = tts_config.get("azurePitch")
+        self.pitch_semitones = tts_config.get("pitchSemitones")
+        self.speed = tts_config.get("speed")
 
     #does azure tts. Saves result to temp file and also returns it
-    def azure_infer(self, text, speaker=None, emotion=None, speed=None):
+    def azure_infer(self, text, speaker=None, emotion=None, speed=None, pitch=None):
         self.tree = etree.parse("azure.xml")
         self.tree.find(".//{*}prosody").text = text
         if emotion is not None:
@@ -44,6 +58,8 @@ class tts_inferer:
             self.tree.find(".//{*}prosody").set("rate", f"{speed}")
         if speaker is not None:
             self.tree.find(".//{*}voice").set("name", speaker)
+        if pitch is not None:
+            self.tree.find(".//{*}prosody").set("pitch", pitch)
         ssml_string = etree.tostring(self.tree).decode('utf-8')
         result = self.azureSynthesizer.speak_ssml_async(ssml_string).get()
         stream = speechsdk.AudioDataStream(result)
@@ -70,11 +86,16 @@ class tts_inferer:
 
         return audio
 
-    def infer(self, text, speaker=None, speed=None):
+    def infer(self, text):
         emotion = self.classifier.map_to_azure_emotion(text)
-        raw_audio = self.azure_infer(text=text, speaker=speaker, speed=speed, emotion=emotion)
-        #NOTE::hard coding filter type for now
-        raw_audio = audio_processor.filter_audio(audio=raw_audio, sr=self.svc.target_sample, filter_type="highpass")
+        raw_audio = self.azure_infer(text=text, speaker=self.base_voice, speed=self.speed, emotion=emotion, pitch=self.azure_pitch)
+        if self.high_pass_cutoff_freq > 0:
+            raw_audio = audio_processor.filter_audio(audio=raw_audio, sr=self.svc.target_sample, filter_type="highpass", cutoff_freq=self.high_pass_cutoff_freq)
+        if self.low_pass_cutoff_freq > 0:
+            raw_audio = audio_processor.filter_audio(audio=raw_audio, sr=self.svc.target_sample, filter_type="lowpass", cutoff_freq=self.low_pass_cutoff_freq)
+        if self.pitch_semitones != 0:
+            raw_audio = audio_processor.shift_frequency(audio=raw_audio, sr=self.svc.target_sample, shift_semitones=self.pitch_semitones)
+
         raw_audio = audio_processor.shift_frequency(raw_audio, self.svc.target_sample, 5)
         audio = self.svc_infer(raw_audio)
         return audio, raw_audio
