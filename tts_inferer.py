@@ -1,6 +1,6 @@
 import torch
 from pathlib import Path
-from so_vits_svc_fork.inference.infer_tool import Svc
+from so_vits_svc_fork.inference.core import Svc
 import numpy as np
 import librosa
 import azure.cognitiveservices.speech as speechsdk
@@ -12,16 +12,15 @@ import json
 
 class tts_inferer:
     def __init__(self, model_folder_name):
-        model_folder = Path("models/" + model_folder_name)
-        self.__initialise_tts_config(model_folder)
-        self.__initialise_sovits(model_folder)
+        self.model_folder = Path("models/" + model_folder_name)
+        self.__initialise_sovits()
         self.__initialise_azure()
         self.classifier = emotion_classifier()
 
-    def __initialise_sovits(self, model_folder):
+    def __initialise_sovits(self):
         device = "cuda" if torch.cuda.is_available() else "cpu"
-        svc_config_path = model_folder / "config.json"
-        svc_model_path = next(iter(model_folder.glob("G_*.pth")), None)
+        svc_config_path = self.model_folder / "config.json"
+        svc_model_path = next(iter(self.model_folder.glob("G_*.pth")), None)
         self.svc = Svc(
             net_g_path=svc_model_path.as_posix(),
             config_path=svc_config_path.as_posix(),
@@ -37,8 +36,8 @@ class tts_inferer:
         speech_config.set_speech_synthesis_output_format(speechsdk.SpeechSynthesisOutputFormat.Riff24Khz16BitMonoPcm)  
         self.azureSynthesizer = speechsdk.SpeechSynthesizer(speech_config=speech_config, audio_config=None)
 
-    def __initialise_tts_config(self, model_folder):
-        tts_config_path = model_folder / "tts-config.json"
+    def __initialise_tts_config(self):
+        tts_config_path = self.model_folder / "tts-config.json"
         with open(tts_config_path) as f:
             tts_config = json.load(f)
         self.base_voice = tts_config.get("baseVoice")
@@ -87,6 +86,7 @@ class tts_inferer:
         return audio
 
     def infer(self, text):
+        self.__initialise_tts_config()
         emotion = self.classifier.map_to_azure_emotion(text)
         raw_audio = self.azure_infer(text=text, speaker=self.base_voice, speed=self.speed, emotion=emotion, pitch=self.azure_pitch)
         if self.high_pass_cutoff_freq > 0:

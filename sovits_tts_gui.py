@@ -1,14 +1,6 @@
-import torch
-from pathlib import Path
-from so_vits_svc_fork.inference.infer_tool import Svc
-import numpy as np
 import librosa
 import gradio as gr
 import webbrowser
-import azure.cognitiveservices.speech as speechsdk
-import os
-from emotion_classifier import emotion_classifier
-from lxml import etree
 from tts_inferer import tts_inferer
 
 def sovits_tts_infer(text):
