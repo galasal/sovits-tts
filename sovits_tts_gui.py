@@ -16,7 +16,7 @@ def sovits_infer(file_path):
     audio = inferer.svc_infer(audio)
     return (inferer.svc.target_sample, audio)
 
-inferer = tts_inferer("purin")
+inferer = tts_inferer("ceres_fauna")
 
 app = gr.Blocks()
 with app:

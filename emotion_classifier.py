@@ -10,7 +10,7 @@ class emotion_classifier:
         'amusement': 'cheerful',
         'gratitude': 'cheerful',
         'joy': 'cheerful',
-        'realisation': 'cheerful',
+        'realization': 'cheerful',
         'admiration': 'excited',
         'desire': 'excited',
         'excitement': 'excited',
@@ -30,6 +30,9 @@ class emotion_classifier:
         'fear': 'terrified',
         'confusion': 'unfriendly',
         'disapproval': 'unfriendly',
+        'surprise': 'excited',
+        'anxiety': 'terrified',
+        'whispering': 'whispering'
     }
 
     def __init__(self):

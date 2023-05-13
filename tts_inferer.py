@@ -46,6 +46,7 @@ class tts_inferer:
         self.azure_pitch = tts_config.get("azurePitch")
         self.pitch_semitones = tts_config.get("pitchSemitones")
         self.speed = tts_config.get("speed")
+        self.emotion_override = tts_config.get("emotionOverride")
 
     #does azure tts. Saves result to temp file and also returns it
     def azure_infer(self, text, speaker=None, emotion=None, speed=None, pitch=None):
@@ -87,7 +88,10 @@ class tts_inferer:
 
     def infer(self, text):
         self.__initialise_tts_config()
-        emotion = self.classifier.map_to_azure_emotion(text)
+        if self.emotion_override in self.classifier.model_emotions.values():
+            emotion = self.emotion_override
+        else:
+            emotion = self.classifier.map_to_azure_emotion(text)
         raw_audio = self.azure_infer(text=text, speaker=self.base_voice, speed=self.speed, emotion=emotion, pitch=self.azure_pitch)
         if self.high_pass_cutoff_freq > 0:
             raw_audio = audio_processor.filter_audio(audio=raw_audio, sr=self.svc.target_sample, filter_type="highpass", cutoff_freq=self.high_pass_cutoff_freq)
@@ -95,8 +99,6 @@ class tts_inferer:
             raw_audio = audio_processor.filter_audio(audio=raw_audio, sr=self.svc.target_sample, filter_type="lowpass", cutoff_freq=self.low_pass_cutoff_freq)
         if self.pitch_semitones != 0:
             raw_audio = audio_processor.shift_frequency(audio=raw_audio, sr=self.svc.target_sample, shift_semitones=self.pitch_semitones)
-
-        raw_audio = audio_processor.shift_frequency(raw_audio, self.svc.target_sample, 5)
         audio = self.svc_infer(raw_audio)
         return audio, raw_audio
 
