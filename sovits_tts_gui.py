@@ -2,9 +2,12 @@ import librosa
 import gradio as gr
 import webbrowser
 from tts_inferer import tts_inferer
+import os as os
 
-def sovits_tts_infer(text):
-    audio, raw_audio = inferer.infer(text)
+model_names = [name for name in os.listdir("./models/")]
+
+def sovits_tts_infer(text, use_azure):
+    audio, raw_audio = inferer.infer(text, use_azure)
     return (inferer.svc.target_sample, audio), (inferer.svc.target_sample, raw_audio)
 
 def tts_infer(text):
@@ -16,10 +19,14 @@ def sovits_infer(file_path):
     audio = inferer.svc_infer(audio)
     return (inferer.svc.target_sample, audio)
 
-inferer = tts_inferer("ceres_fauna")
+def update_inferer(dropdown_value):
+    global inferer
+    inferer = tts_inferer(dropdown_value)
 
 app = gr.Blocks()
 with app:
+    use_azure_checkbox = gr.Checkbox(label="Use Azure")
+    inferer_dropdown = gr.Dropdown(model_names, label="Inferer")
     with gr.Tab("sovits tts"):
         with gr.Row():
             with gr.Column():
@@ -31,7 +38,7 @@ with app:
                 audio_output = gr.Audio(label="Output Audio", elem_id="tts-audio")
                 btn = gr.Button("Generate!")
                 btn.click(sovits_tts_infer,
-                            inputs=[textbox],
+                            inputs=[textbox, use_azure_checkbox],
                             outputs=[audio_output, raw_output])
     with gr.Tab("azure only"):
         with gr.Row():
@@ -57,6 +64,7 @@ with app:
                 btn.click(sovits_infer,
                             inputs=[textbox],
                             outputs=[audio_output])
-                
+    inferer_dropdown.change(update_inferer, inputs=[inferer_dropdown])
+
 webbrowser.open("http://127.0.0.1:7860")
 app.launch(share=False)

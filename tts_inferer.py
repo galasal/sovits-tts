@@ -9,6 +9,8 @@ from emotion_classifier import emotion_classifier
 from lxml import etree
 import audio_processor
 import json
+import edge_tts
+import asyncio
 
 class tts_inferer:
     def __init__(self, model_folder_name):
@@ -18,7 +20,7 @@ class tts_inferer:
         self.classifier = emotion_classifier()
 
     def __initialise_sovits(self):
-        device = "cuda" if torch.cuda.is_available() else "cpu"
+        device = "cuda:0" if torch.cuda.is_available() else "cpu"
         svc_config_path = self.model_folder / "config.json"
         svc_model_path = next(iter(self.model_folder.glob("G_*.pth")), None)
         self.svc = Svc(
@@ -29,7 +31,7 @@ class tts_inferer:
         )
 
     def __initialise_azure(self):
-        self.azure_temp_file = "tmp/tmp.wav"
+        self.audio_temp_file = "tmp/tmp.wav"
         speech_key = os.environ.get('SPEECH_KEY')
         service_region = os.environ.get('SPEECH_REGION')
         speech_config = speechsdk.SpeechConfig(subscription=speech_key, region=service_region)
@@ -63,8 +65,8 @@ class tts_inferer:
         ssml_string = etree.tostring(self.tree).decode('utf-8')
         result = self.azureSynthesizer.speak_ssml_async(ssml_string).get()
         stream = speechsdk.AudioDataStream(result)
-        stream.save_to_wav_file(self.azure_temp_file)
-        audio, sr = librosa.load(self.azure_temp_file, sr=self.svc.target_sample)  
+        stream.save_to_wav_file(self.audio_temp_file)
+        audio, sr = librosa.load(self.audio_temp_file, sr=self.svc.target_sample)  
         return audio 
 
     #convert audio using so-vits-svc
@@ -86,13 +88,29 @@ class tts_inferer:
 
         return audio
 
-    def infer(self, text):
-        self.__initialise_tts_config()
-        if self.emotion_override in self.classifier.model_emotions.values():
-            emotion = self.emotion_override
+    async def edge_infer(self, text, speaker, speed=1):
+        #convert speed to +x% format
+        speed = (int)(speed * 100 - 100)
+        if speed >= 0:
+            speed = f"+{speed}%"
         else:
-            emotion = self.classifier.map_to_azure_emotion(text)
-        raw_audio = self.azure_infer(text=text, speaker=self.base_voice, speed=self.speed, emotion=emotion, pitch=self.azure_pitch)
+            speed = f"{speed}%"
+
+        communicate = edge_tts.Communicate(text=text, voice=speaker, rate=speed)
+        await communicate.save(self.audio_temp_file)
+        audio, sr = librosa.load(self.audio_temp_file, sr=self.svc.target_sample)  
+        return audio 
+
+    def infer(self, text, use_azure):
+        self.__initialise_tts_config()
+        if use_azure:
+            if self.emotion_override in self.classifier.model_emotions.values():
+                emotion = self.emotion_override
+            else:
+                emotion = self.classifier.map_to_azure_emotion(text)
+            raw_audio = self.azure_infer(text=text, speaker=self.base_voice, speed=self.speed, emotion=emotion, pitch=self.azure_pitch)
+        else:
+            raw_audio = asyncio.run(self.edge_infer(text, self.base_voice, self.speed))
         if self.high_pass_cutoff_freq > 0:
             raw_audio = audio_processor.filter_audio(audio=raw_audio, sr=self.svc.target_sample, filter_type="highpass", cutoff_freq=self.high_pass_cutoff_freq)
         if self.low_pass_cutoff_freq > 0:
