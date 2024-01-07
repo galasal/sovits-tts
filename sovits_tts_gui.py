@@ -25,11 +25,16 @@ def sovits_infer(file_path):
 def update_inferer(dropdown_value):
     global inferer
     inferer = tts_inferer(dropdown_value)
+    return "Model " + dropdown_value + " loaded"
 
 app = gr.Blocks()
 with app:
-    use_azure_checkbox = gr.Checkbox(label="Use Azure")
-    inferer_dropdown = gr.Dropdown(model_names, label="Inferer")
+    with gr.Row():
+        with gr.Column():
+            inferer_dropdown = gr.Dropdown(model_names, label="Inferer")
+            use_azure_checkbox = gr.Checkbox(label="Use Azure")
+        with gr.Column(scale=0.2):
+            inferer_loading = gr.Textbox(interactive=False, show_label=False)
     with gr.Tab("sovits tts"):
         with gr.Row():
             with gr.Column():
@@ -69,7 +74,7 @@ with app:
                             inputs=[upload_audio],
                             #inputs=[textbox],
                             outputs=[audio_output])
-    inferer_dropdown.change(update_inferer, inputs=[inferer_dropdown])
+    inferer_dropdown.change(update_inferer, inputs=[inferer_dropdown], outputs=[inferer_loading])
 
 webbrowser.open("http://127.0.0.1:7860")
 app.launch(share=False)
