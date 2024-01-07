@@ -3,6 +3,7 @@ import gradio as gr
 import webbrowser
 from tts_inferer import tts_inferer
 import os as os
+import soundfile as sf
 
 model_names = [name for name in os.listdir("./models/")]
 
@@ -15,7 +16,9 @@ def tts_infer(text):
     return (inferer.svc.target_sample, audio)
 
 def sovits_infer(file_path):
-    audio, sr = librosa.load(file_path, inferer.svc.target_sample)  
+    sr, audio = file_path
+    sf.write(inferer.audio_temp_file, audio, sr)
+    audio, sr = librosa.load(inferer.audio_temp_file, inferer.svc.target_sample)  
     audio = inferer.svc_infer(audio)
     return (inferer.svc.target_sample, audio)
 
@@ -55,14 +58,16 @@ with app:
     with gr.Tab("sovits only"):
         with gr.Row():
             with gr.Column():
-                textbox = gr.TextArea(label="File",
-                                        placeholder="Type path to wav file here",
-                                        value="F:/AIVoice/sovits-tts/tmp/tmp.wav", elem_id=f"tts-input")
+                #textbox = gr.TextArea(label="File",
+                                        #placeholder="Type path to wav file here",
+                                        #value="F:/AIVoice/sovits-tts/tmp/tmp.wav", elem_id=f"tts-input")
+                upload_audio = gr.Audio(label='audio to convert', source='upload', interactive=True)
             with gr.Column():
                 audio_output = gr.Audio(label="Output Audio", elem_id="tts-audio")
                 btn = gr.Button("Generate!")
                 btn.click(sovits_infer,
-                            inputs=[textbox],
+                            inputs=[upload_audio],
+                            #inputs=[textbox],
                             outputs=[audio_output])
     inferer_dropdown.change(update_inferer, inputs=[inferer_dropdown])
 

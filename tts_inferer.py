@@ -101,7 +101,7 @@ class tts_inferer:
         audio, sr = librosa.load(self.audio_temp_file, sr=self.svc.target_sample)  
         return audio 
 
-    def infer(self, text, use_azure):
+    def infer(self, text, use_azure):           
         self.__initialise_tts_config()
         if use_azure:
             if self.emotion_override in self.classifier.model_emotions.values():
@@ -118,5 +118,6 @@ class tts_inferer:
         if self.pitch_semitones != 0:
             raw_audio = audio_processor.shift_frequency(audio=raw_audio, sr=self.svc.target_sample, shift_semitones=self.pitch_semitones)
         audio = self.svc_infer(raw_audio)
+
         return audio, raw_audio
 
